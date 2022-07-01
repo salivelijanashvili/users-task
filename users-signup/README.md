@@ -12,5 +12,5 @@
 
 #### Import Database
 
-1. Create a database named `users_list`.
+1. Create a database named `users_table`.
 2. Import `.sql` file in the database to create an initial table.
