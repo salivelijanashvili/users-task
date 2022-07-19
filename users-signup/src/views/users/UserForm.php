@@ -1,4 +1,8 @@
 <?php if ($_SERVER['REQUEST_URI'] !== '/dashboard'):  ?>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
 <form name="user_form" action="/dashboard" method="post">
     <label for="name">First name:</label>
     <input type="text" placeholder="name" id="name" name="name"><br><br>
@@ -6,6 +10,30 @@
     <input type="text"  placeholder="last_name"  id="last_name" name="last_name"><br><br>
     <input class="btn btn-success" type="submit" name="Submit" value="Submit"">
 </form>
+<script>
+    $("#typeSwitcher").on("change", function() {
+        $(".selectable").hide();
+        const a = $("#" + $(this).val()).show();
+        console.log(a);
+    })
+
+    function validate() {
+        if (document.user_form.name.value === '') {
+            alert('Please provide a name');
+            document.user_form.name.focus();
+            return false;
+        }
+        if (document.user_form.price.value === '') {
+            alert('Please provide a last name');
+            document.user_form.last_name.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+
+
 <?php else: ?>
 <!--    <meta http-equiv="refresh" content="0">-->
     <h1>Added users</h1>
@@ -35,24 +63,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<script>
-    $("#typeSwitcher").on("change", function() {
-        $(".selectable").hide();
-        const a = $("#" + $(this).val()).show();
-        console.log(a);
-    })
 
-    function validate() {
-        if (document.user_form.name.value === '') {
-            alert('Please provide a name');
-            document.user_form.name.focus();
-            return false;
-        }
-        if (document.user_form.price.value === '') {
-            alert('Please provide a last name');
-            document.user_form.last_name.focus();
-            return false;
-        }
-        return true;
-    }
-</script>
