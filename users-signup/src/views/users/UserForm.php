@@ -1,6 +1,38 @@
+
 <?php if ($_SERVER['REQUEST_URI'] !== '/dashboard'):  ?>
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+        $(function () {
+
+            $('form').on('submit', function (e) {
+
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'post',
+                    url: '/',
+                    data: $('form').serialize(),
+                    success: function () {
+                        if (document.user_form.name.value === '') {
+                            alert('Please provide a name');
+                            document.user_form.name.focus();
+                            return false;
+                        }
+                        if (document.user_form.last_name.value === '') {
+                            alert('Please provide a last name');
+                            document.user_form.last_name.focus();
+                            return false;
+                        }
+                        alert('form was submitted');
+                    }
+                });
+
+
+            });
+
+        });
+    </script>
 </head>
 <body>
 <form name="user_form" action="/dashboard" method="post">
@@ -10,27 +42,6 @@
     <input type="text"  placeholder="last_name"  id="last_name" name="last_name"><br><br>
     <input class="btn btn-success" type="submit" name="Submit" value="Submit"">
 </form>
-<script>
-    $("#typeSwitcher").on("change", function() {
-        $(".selectable").hide();
-        const a = $("#" + $(this).val()).show();
-        console.log(a);
-    })
-
-    function validate() {
-        if (document.user_form.name.value === '') {
-            alert('Please provide a name');
-            document.user_form.name.focus();
-            return false;
-        }
-        if (document.user_form.price.value === '') {
-            alert('Please provide a last name');
-            document.user_form.last_name.focus();
-            return false;
-        }
-        return true;
-    }
-</script>
 </body>
 
 
@@ -62,5 +73,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-
 
